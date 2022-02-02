@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+from telnetlib import AUTHENTICATION
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,11 +42,7 @@ INSTALLED_APPS = [
     'accounts',
     'pages',
 ]
-AUTH_USER_MODEL = 'accounts.CustomUser'
-# url login,redirection account
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -136,3 +133,20 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
+
+#django allauth config
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+#cripsy
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# url login,redirection account
+LOGIN_REDIRECT_URL = 'home'
+ACCOUNT_LOGOUT_REDIRECT = 'home'
+
+SITE_ID = 1
+AUTHENTICATION_BACKENDS = {
+    'django.contri.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+}
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
